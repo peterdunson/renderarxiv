@@ -43,7 +43,6 @@ def build_html(query: str, papers: List[Paper]) -> str:
         arxiv_url = p.arxiv_url
         pdf_url = p.pdf_url
         published = p.published[:10]  # Just date
-        citations = p.citations if p.citations is not None else "N/A"
         
         # Categories with human-readable names
         category_tags = []
@@ -68,7 +67,6 @@ def build_html(query: str, papers: List[Paper]) -> str:
           <div class="meta">
             <span class="authors">👥 {authors_str}</span>
             <span class="date">📅 {published}</span>
-            <span class="citations">📊 {citations} citations</span>
           </div>
           <div class="categories">{categories_html}</div>
           <div class="abstract">{abstract}</div>
@@ -398,8 +396,8 @@ def main() -> int:
 Examples:
   renderarxiv "transformer attention mechanism"
   renderarxiv "quantum computing" --mode recent --max-results 15
-  renderarxiv "deep learning" --category cs.LG --mode cited
-  renderarxiv "neural networks" --mode semantic --fetch-citations
+  renderarxiv "deep learning" --category cs.LG --mode relevant
+  renderarxiv "neural networks" --mode semantic
         """
     )
     ap.add_argument("query", help="Search query")
@@ -411,7 +409,7 @@ Examples:
     )
     ap.add_argument(
         "--mode",
-        choices=["balanced", "recent", "cited", "influential", "relevant", "semantic"],
+        choices=["balanced", "recent", "relevant", "semantic"],
         default="balanced",
         help="Ranking mode (default: balanced)"
     )
@@ -425,11 +423,7 @@ Examples:
         default="relevance",
         help="arXiv API sort criterion (default: relevance)"
     )
-    ap.add_argument(
-        "--fetch-citations",
-        action="store_true",
-        help="Fetch citation counts from Semantic Scholar (slower)"
-    )
+
     ap.add_argument(
         "-o", "--out", 
         help="Output HTML file path (default: temp file)"
@@ -457,10 +451,6 @@ Examples:
     if not papers:
         print("❌ No papers found. Try a different query.", file=sys.stderr)
         return 1
-
-    # Fetch citations if requested or if mode requires it
-    if args.fetch_citations or args.mode in ["cited", "influential", "balanced"]:
-        papers = fetch_citations_batch(papers)
 
     # Rank and filter
     if args.mode == "semantic":
