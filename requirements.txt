@@ -1,0 +1,17 @@
+# Core API requests
+requests>=2.31.0
+
+# arXiv API feed parsing
+feedparser>=6.0.10
+
+# HTML parsing (for abstracts)
+beautifulsoup4>=4.12.3
+
+# Environment variables
+python-dotenv>=1.0.1
+
+# Data validation
+pydantic>=2.9.2
+
+# Syntax highlighting for code blocks
+pygments>=2.19.0

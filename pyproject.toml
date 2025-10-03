@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "renderarxiv"
+version = "0.1.0"
+description = "Search arXiv and render results into human + LLM-friendly formats"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name"},
+]
+requires-python = ">=3.10"
+keywords = ["arxiv", "papers", "research", "preprints", "LLM", "machine learning", "AI"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "requests>=2.31.0",
+    "feedparser>=6.0.10",
+    "beautifulsoup4>=4.12.3",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.9.2",
+    "pygments>=2.19.0",
+]
+
+[project.optional-dependencies]
+semantic = [
+    "sentence-transformers>=2.2.2",
+]
+
+[project.scripts]
+renderarxiv = "renderarxiv.cli:main"
+
+[tool.setuptools]
+packages = ["renderarxiv"]
+
+[project.urls]
+Homepage = "https://github.com/peterdunson/renderarxiv"
+Repository = "https://github.com/peterdunson/renderarxiv"
