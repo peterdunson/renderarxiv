@@ -1,5 +1,7 @@
 # 🔬 renderarxiv
 
+![renderarxiv demo](readme.png)
+
 Search arXiv from your terminal and get beautiful HTML results you can read or copy-paste into ChatGPT/Claude.
 
 No more hallucinated papers — everything is real, straight from arXiv.
