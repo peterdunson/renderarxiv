@@ -6,6 +6,8 @@ Search arXiv from your terminal and get beautiful HTML results you can read or c
 
 No more hallucinated papers — everything is real, straight from arXiv.
 
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=peterdunson.renderarxiv)
+
 ---
 
 ## 📥 Install
